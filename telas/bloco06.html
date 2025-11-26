@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
+<title>Bloco 6 – Prompt Engineering Profissional</title>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#05070c;color:#ededed;font-family:Inter,Arial;padding:40px;display:flex;justify-content:center}
+.deck{max-width:1200px;width:100%}
+.slide{background:#0a0f18;border:1px solid #0ff5;box-shadow:0 0 40px #0af5;padding:44px;border-radius:22px}
+h1{font-size:34px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.subtitle{font-size:16px;color:#8af0ff;letter-spacing:0.15em;margin-bottom:30px}
+.section{font-size:22px;margin-top:32px;margin-bottom:14px;color:#8af0ff;text-transform:uppercase}
+p{font-size:17px;line-height:1.75;margin-bottom:14px;color:#d0d6e0}
+ul{margin-left:24px;margin-bottom:16px}
+li{margin-bottom:10px;font-size:16px;line-height:1.65}
+.code{background:#000d14;border:1px solid #0ff6;padding:16px;border-radius:10px;font-family:JetBrains Mono,monospace;font-size:14px;white-space:pre-wrap;color:#9cecff;margin-bottom:22px}
+</style>
+</head>
+<body>
+<div class='deck'>
+<div class='slide'>
+
+<h1>BLOCO 6 — PROMPT ENGINEERING PROFISSIONAL</h1>
+<div class='subtitle'>DA IMAGINAÇÃO À CENA FILMADA</div>
+
+<p>
+Este é um dos blocos centrais de todo o curso. Aqui você aprende a habilidade que separa um usuário casual de IA
+de um <strong>diretor capaz de criar vídeos consistentes, cinematográficos e vendáveis</strong>.
+O objetivo deste módulo é te transformar em alguém capaz de:
+</p>
+
+<ul>
+<li>traduzir ideias em instruções cinematográficas;</li>
+<li>escrever prompts com a mesma lógica da direção de fotografia;</li>
+<li>controlar lente, câmera, luz, textura e narrativa;</li>
+<li>reduzir variação entre takes gerados pela IA;</li>
+<li>criar pipelines de prompts reutilizáveis e eficientes.</li>
+</ul>
+
+<!-- SECTION 1 -->
+<div class='section'>1. O prompt como decupagem condensada</div>
+
+<p>
+O erro mais comum é achar que prompt é “apenas descrição”. Não é.  
+Prompt é <strong>decupagem comprimida em texto</strong>.  
+Ele deve conter tudo o que seria dito em um set real:
+</p>
+
+<ul>
+<li>qual é o plano;</li>
+<li>qual é a lente;</li>
+<li>qual é a luz;</li>
+<li>qual é o tom emocional;</li>
+<li>qual é a textura;</li>
+<li>qual é a função narrativa daquele plano.</li>
+</ul>
+
+<p>
+Se a IA te der algo aleatório, quase sempre é porque <strong>você descreveu de forma aleatória</strong>.
+</p>
+
+<!-- CODE EXAMPLE -->
+<div class='code'>
+Prompt fraco:  
+“Um homem sentado no restaurante.”
+
+Prompt profissional:  
+“Cinematic medium shot of a confident man in a premium Italian restaurant at golden hour,  
+Arri Alexa Mini LF, 35mm lens, soft practical lights in the background, shallow depth of field,  
+warm ambiance, subtle film grain, relaxed expression, commercial lifestyle tone”
+</div>
+
+<p>
+Veja como o segundo prompt entrega um plano que pode realmente entrar no seu filme.
+</p>
+
+<!-- SECTION 2 -->
+<div class='section'>2. A estrutura definitiva de prompt para audiovisual</div>
+
+<p>
+Use sempre esta estrutura, que funciona para 95% das cenas:
+</p>
+
+<div class='code'>
+[PLANO]  
+[LENTE]  
+[CÂMERA]  
+[LUZ]  
+[AMBIENTE]  
+[AÇÃO / MOVIMENTO]  
+[TEXTURA / ESTILO]  
+[CLIMA / EMOÇÃO]  
+[NEGATIVOS]
+</div>
+
+<p>
+Isso evita que você esqueça elementos essenciais de cinema: lente, luz, textura, narrativa.
+</p>
+
+<!-- SECTION 3 -->
+<div class='section'>3. O papel dos meta tokens dentro do prompt</div>
+
+<p>
+Meta tokens são os atalhos que fazem a IA entender o “tipo de cinema” que você quer gerar.
+</p>
+
+<ul>
+<li><strong>Câmeras:</strong> Arri Alexa, RED, Sony Venice…</li>
+<li><strong>Lentes:</strong> 24mm, 35mm, 85mm, 100mm macro…</li>
+<li><strong>Luz:</strong> low key, golden hour, neon…</li>
+<li><strong>Texturas:</strong> Kodak Vision3, halation, diffusion…</li>
+</ul>
+
+<p>
+Esses termos dizem à IA: <strong>“gere imagem com essa estética”.</strong>
+</p>
+
+<!-- EXAMPLE -->
+<div class='code'>
+“Ultra cinematic commercial shot of melted chocolate dripping slowly on a strawberry,
+Arri Alexa Mini LF, 100mm macro, low key lighting with deep contrast,  
+Kodak Vision3 500T film grain, soft diffusion, sensual gourmet tone”
+</div>
+
+<!-- SECTION 4 -->
+<div class='section'>4. O prompt como ferramenta de consistência</div>
+
+<p>
+Consistência (um dos 3 pilares) depende de como você escreve prompts.  
+Planos que pertencem ao mesmo filme devem compartilhar:
+</p>
+
+<ul>
+<li>a mesma câmera;</li>
+<li>a mesma lente;</li>
+<li>a mesma paleta de luz;</li>
+<li>a mesma textura;</li>
+<li>a mesma direção emocional.</li>
+</ul>
+
+<p>
+Se cada prompt for escrito como se fosse um novo filme, o resultado vai parecer um <strong>reels de testes</strong>.
+</p>
+
+<!-- SECTION 5 -->
+<div class='section'>5. Como iterar como um profissional (micro-ajustes)</div>
+
+<p>
+Profissionais de IA não escrevem prompts enormes.  
+Profissionais escrevem <strong>prompts claros e iteram rápido</strong>.
+</p>
+
+<p>Processo de micro-iteração:</p>
+
+<ul>
+<li>Gere 3 versões do plano;</li>
+<li>Observe a lente, luz, textura, narrativa;</li>
+<li>Ajuste 1 ou 2 elementos (NUNCA tudo);</li>
+<li>Gere novamente;</li>
+<li>Aplique negatives conforme necessário.</li>
+</ul>
+
+<p>
+Iterar assim evita que os modelos se percam.
+</p>
+
+<!-- EXAMPLE -->
+<div class='code'>
+Problema: luz chapada → adicione “cinematic low key lighting, strong rim light”.
+
+Problema: cenário poluído → adicione “clean background, minimal environment”.
+
+Problema: textura artificial → adicione “soft diffusion, realistic film grain”.
+</div>
+
+<!-- SECTION 6 -->
+<div class='section'>6. Negative tokens como ferramenta de limpeza</div>
+
+<p>
+Negativos não são opcionais. Eles determinam a pureza do visual.
+</p>
+
+<div class='code'>
+--no text, --no watermark,  
+--no distortions, --no extra limbs,  
+--no oversaturated colors, --no cartoon style
+</div>
+
+<p>
+Use sempre — especialmente para food, produto e imobiliário.
+</p>
+
+<!-- SECTION 7 -->
+<div class='section'>7. Bibliotecas pessoais de prompts</div>
+
+<p>
+Os melhores criadores de IA têm bibliotecas privadas com prompts base:
+</p>
+
+<ul>
+<li>Prompt base de food macro;</li>
+<li>Prompt base de gastronomia em 45°;</li>
+<li>Prompt base de produto luxo;</li>
+<li>Prompt base de imobiliário 24mm;</li>
+<li>Prompt base de plano emocional (personagem).</li>
+</ul>
+
+<p>
+Ter uma biblioteca assim deixa seu workflow <strong>10x mais rápido e mais consistente</strong>.
+</p>
+
+<!-- SECTION 8 -->
+<div class='section'>8. Prompts como parte da narrativa</div>
+
+<p>
+Um prompt nunca é isolado: ele faz parte do fluxo narrativo.  
+A pergunta é sempre:
+</p>
+
+<p><strong>“Este plano comunica qual parte da história?”</strong></p>
+
+<p>
+Se a resposta não for clara, o prompt está errado.
+</p>
+
+</div>
+</div>
+</body>
+</html>

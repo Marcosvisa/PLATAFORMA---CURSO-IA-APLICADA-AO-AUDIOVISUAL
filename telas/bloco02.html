@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>IA Aplicada ao Audiovisual – Bloco 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top, #101622 0, #05070c 40%, #020308 100%);
+      color: #ededed;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 16px 48px;
+      gap: 24px;
+    }
+    .deck {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .slide {
+      position: relative;
+      border-radius: 24px;
+      padding: 32px 40px;
+      background: radial-gradient(circle at top left, rgba(0,228,255,0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(0,228,255,0.12), transparent 55%),
+                  #05070c;
+      border: 1px solid rgba(0,228,255,0.18);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 26px 60px rgba(0,0,0,0.85),
+        0 0 120px rgba(0,228,255,0.08);
+      overflow: hidden;
+    }
+    .slide::before,
+    .slide::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00e4ff, transparent);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .slide::before { top: 0; }
+    .slide::after { bottom: 0; }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+    .slide-kicker {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #7e8a94;
+    }
+    .slide-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(0,228,255,0.25);
+    }
+    .slide-subtitle {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      margin-top: 8px;
+    }
+    .slide-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.65);
+      background: rgba(5,9,16,0.8);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .slide-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #00e4ff;
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+    }
+
+    .slide-body {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .slide-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .slide-main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .slide-main p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #c8d0da;
+    }
+    .slide-main-hero {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    .slide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .slide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #d0d7e2;
+    }
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 5px;
+      background: radial-gradient(circle, #00e4ff, #0096b5);
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+      flex-shrink: 0;
+    }
+
+    .slide-aside {
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(0,228,255,0.45);
+      background: linear-gradient(145deg, rgba(8,16,24,0.95), rgba(4,8,16,0.96));
+      box-shadow: 0 0 32px rgba(0,228,255,0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .aside-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+    }
+    .aside-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+    .aside-text {
+      font-size: 14px;
+      color: #c0cad8;
+      line-height: 1.6;
+    }
+    .aside-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.28);
+      color: #9be9ff;
+      background: rgba(3,10,18,0.9);
+    }
+
+    .code-block {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #05070c;
+      border: 1px solid rgba(0,228,255,0.35);
+      color: #9cecff;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.7);
+    }
+
+    .slide-footer {
+      margin-top: 18px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #5f6a76;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,228,255,0.5), transparent);
+      margin-left: 12px;
+    }
+
+    .deck-title {
+      width: 100%;
+      max-width: 1400px;
+      text-align: left;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #6c7684;
+    }
+    .slide-section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .slide-example-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #8af0ff;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-title">CURSO • IA APLICADA AO AUDIOVISUAL</div>
+  <main class="deck">
+
+    <!-- BLOCO 2 – ESTRUTURA DO CURSO -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">VISÃO GERAL</div>
+          <h1 class="slide-title">Estrutura do curso</h1>
+          <div class="slide-subtitle">COMO O CONTEÚDO FOI PENSADO PARA VOCÊ EVOLUIR</div>
+        </div>
+        <div class="slide-badge">
+          <span class="slide-badge-dot"></span>
+          9 MÓDULOS • 3 PROJETOS
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-main">
+          <p class="slide-main-hero">
+            Este curso foi desenhado como um <strong>pipeline de produção real</strong>: você entra com ideias soltas e sai com
+            <strong>projetos prontos</strong>, entendendo cada etapa do processo. Nada aqui está solto; cada módulo conversa com o anterior
+            e prepara você para o próximo.
+          </p>
+
+          <p>
+            A estrutura se organiza em três grandes blocos de evolução:
+          </p>
+
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Bloco 1 – Fundamentos (Módulos 1–3):</strong> entendimento de IA no audiovisual, prompt engineering e criação de frames base.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Bloco 2 – Execução prática (Módulos 4–6):</strong> vídeo com IA, voz, roteiro, edição e finalização.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Bloco 3 – Mercado e aplicação (Módulos 7–9):</strong> oportunidades B2B, projetos finais e bônus de workflow e materiais prontos.</span>
+            </li>
+          </ul>
+
+          <div class="slide-section-title">1. Do zero ao avançado, em camadas</div>
+          <p>
+            Você não precisa chegar aqui sabendo tudo. A ideia é que o curso te acompanhe desde o primeiro contato mais estruturado com IA até a
+            produção de <strong>peças profissionais que podem ser vendidas</strong>.
+          </p>
+
+          <div class="code-block">
+CAMADA 1 — ENTENDER
+Fundamentos, conceitos, linguagem de set em forma de prompt.
+
+CAMADA 2 — EXECUTAR
+Gerar imagens, vídeos, cenas completas, aplicar motion e direção.
+
+CAMADA 3 — ENTREGAR
+Montar projetos, formatar para cliente, precificar e vender.
+          </div>
+
+          <p>
+            Em vez de jogar tudo de uma vez, a estrutura te dá um caminho: você constrói a base, depois adiciona complexidade, depois leva isso para o mundo real.
+          </p>
+
+          <div class="slide-section-title">2. O que cada grupo de módulos entrega</div>
+
+          <div class="slide-example-label">Módulos 1–3 — Fundamentos, prompts e frames</div>
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 1:</strong> como a IA entrou no audiovisual, os 3 pilares (consistência, precisão, realismo) e como os modelos funcionam.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 2:</strong> prompt engineering profissional: prompts cinematográficos, meta tokens, estrutura para publicidade e negative tokens.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 3:</strong> criação de frames base perfeitos para animação e vídeo, pensando já no movimento que virá depois.</span>
+            </li>
+          </ul>
+
+          <div class="slide-example-label">Módulos 4–6 — Execução prática com IA + edição</div>
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 4:</strong> geração de vídeos cinemáticos com IA, controle de câmera, uso de modelos como Veo/Sora e workflow inteligente.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 5:</strong> uso de IA para roteiros, locuções, direções de cena e ajustes finos de narrativa.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 6:</strong> edição, color grading e finalização para que o resultado pareça filmado e pronto para cliente.</span>
+            </li>
+          </ul>
+
+          <div class="slide-example-label">Módulos 7–9 — Mercado, projetos e bônus</div>
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 7:</strong> leitura de mercado, formatos que vendem, como montar ofertas e pacotes mensais.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 8:</strong> projetos finais guiados: comercial, cena cinematográfica e showreel IA.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Módulo 9:</strong> bônus: biblioteca de prompts, modelos de orçamento, blueprint completo do workflow inteligente.</span>
+            </li>
+          </ul>
+
+          <div class="slide-section-title">3. Como aproveitar melhor a estrutura</div>
+          <p>
+            Você pode assistir ao curso em ordem reta, do começo ao fim, mas a estrutura foi pensada para que você possa também:
+          </p>
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Voltar aos fundamentos</strong> sempre que perceber que está “apanhando” de algum resultado de IA.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Revisitar o Módulo 2</strong> (prompts) sempre que for começar um novo projeto importante.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Usar os módulos 7–9</strong> como referência quando for falar com clientes ou precificar um trabalho.</span>
+            </li>
+          </ul>
+
+          <p>
+            O objetivo é claro: você entende <strong>onde está</strong> dentro da jornada e sabe exatamente qual é o próximo passo.
+            Não é um curso de “efeitos legais” soltos — é uma <strong>linha de produção criativa</strong> que você controla.
+          </p>
+        </div>
+
+        <aside class="slide-aside">
+          <div class="aside-label">MAPA RÁPIDO</div>
+          <div class="aside-title">O curso em uma visão</div>
+          <div class="aside-text">
+            • 9 módulos organizados em 3 grandes blocos.<br>
+            • Da base conceitual à entrega profissional.<br>
+            • Projetos finais que costuram tudo o que você aprendeu.<br>
+            • Bônus pensados para acelerar sua aplicação no mercado.<br><br>
+            A ideia é simples: <strong>te tirar do modo “teste de ferramenta” e te colocar no modo “produção profissional com IA”.</strong>
+          </div>
+          <div class="aside-tags">
+            <span class="tag">FUNDAMENTOS</span>
+            <span class="tag">EXECUÇÃO</span>
+            <span class="tag">MERCADO</span>
+            <span class="tag">PROJETOS</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="slide-footer">
+        <span>BLOCO 2 • ESTRUTURA DO CURSO</span>
+        <div class="footer-line"></div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

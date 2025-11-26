@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>IA Aplicada ao Audiovisual – Bloco 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top, #101622 0, #05070c 40%, #020308 100%);
+      color: #ededed;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 16px 48px;
+      gap: 24px;
+    }
+    .deck {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .slide {
+      position: relative;
+      border-radius: 24px;
+      padding: 32px 40px;
+      background: radial-gradient(circle at top left, rgba(0,228,255,0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(0,228,255,0.12), transparent 55%),
+                  #05070c;
+      border: 1px solid rgba(0,228,255,0.18);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 26px 60px rgba(0,0,0,0.85),
+        0 0 120px rgba(0,228,255,0.08);
+      overflow: hidden;
+    }
+    .slide::before,
+    .slide::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00e4ff, transparent);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .slide::before { top: 0; }
+    .slide::after { bottom: 0; }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+    .slide-kicker {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #7e8a94;
+    }
+    .slide-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(0,228,255,0.25);
+    }
+    .slide-subtitle {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      margin-top: 8px;
+    }
+    .slide-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.65);
+      background: rgba(5,9,16,0.8);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .slide-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #00e4ff;
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+    }
+
+    .slide-body {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .slide-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .slide-main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .slide-main p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #c8d0da;
+    }
+    .slide-main-hero {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    .slide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .slide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #d0d7e2;
+    }
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 5px;
+      background: radial-gradient(circle, #00e4ff, #0096b5);
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+      flex-shrink: 0;
+    }
+
+    .slide-aside {
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(0,228,255,0.45);
+      background: linear-gradient(145deg, rgba(8,16,24,0.95), rgba(4,8,16,0.96));
+      box-shadow: 0 0 32px rgba(0,228,255,0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .aside-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+    }
+    .aside-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+    .aside-text {
+      font-size: 14px;
+      color: #c0cad8;
+      line-height: 1.6;
+    }
+    .aside-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.28);
+      color: #9be9ff;
+      background: rgba(3,10,18,0.9);
+    }
+
+    .code-block {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #05070c;
+      border: 1px solid rgba(0,228,255,0.35);
+      color: #9cecff;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.7);
+    }
+
+    .slide-footer {
+      margin-top: 18px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #5f6a76;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,228,255,0.5), transparent);
+      margin-left: 12px;
+    }
+
+    .deck-title {
+      width: 100%;
+      max-width: 1400px;
+      text-align: left;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #6c7684;
+    }
+    .slide-section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .slide-example-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #8af0ff;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-title">CURSO • IA APLICADA AO AUDIOVISUAL</div>
+  <main class="deck">
+
+    <!-- BLOCO 4 – 3 PILARES: CONSISTÊNCIA, PRECISÃO, REALISMO -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">BLOCO 4</div>
+          <h1 class="slide-title">3 PILARES: CONSISTÊNCIA, PRECISÃO, REALISMO</h1>
+          <div class="slide-subtitle">OS CRITÉRIOS QUE SEPARAM TESTE DE JOB PROFISSIONAL</div>
+        </div>
+        <div class="slide-badge">
+          <span class="slide-badge-dot"></span>
+          BASE DE QUALIDADE
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-main">
+          <p class="slide-main-hero">
+            Antes de pensar em ferramenta, prompt ou modelo, você precisa de um <strong>critério</strong>. Algo interno que te diga:
+            “isso aqui aguenta ir para o cliente” ou “isso aqui ainda está com cara de teste”.<br>
+            Esses critérios, no contexto de IA aplicada ao audiovisual, podem ser resumidos em três pilares:
+            <strong>consistência, precisão e realismo</strong>.
+          </p>
+
+          <p>
+            Se um projeto com IA não respeita esses três pontos, ele pode até ser impressionante isoladamente,
+            mas dificilmente funciona como <strong>peça profissional</strong>.
+          </p>
+
+          <div class="slide-section-title">1. Consistência – tudo precisa parecer do mesmo universo</div>
+          <p>
+            <strong>Consistência</strong> é o quanto as partes do seu vídeo parecem pertencer ao mesmo mundo: mesma linguagem,
+            mesma estética, mesmo “DNA visual”. Em IA, isso vale para:
+          </p>
+          <ul class="slide-list">
+            <li><span class="bullet-dot"></span><span><strong>Personagens:</strong> rosto, corpo, roupa e atitude se mantendo ao longo das cenas.</span></li>
+            <li><span class="bullet-dot"></span><span><strong>Câmera:</strong> estilo de enquadramento e tipo de movimento coerentes.</span></li>
+            <li><span class="bullet-dot"></span><span><strong>Luz e cor:</strong> paleta alinhada, sem cortes que parecem “de outro filme”.</span></li>
+          </ul>
+
+          <div class="slide-example-label">Exemplo – falta de consistência</div>
+          <p>
+            Imagine um vídeo de 30 segundos para uma cafeteria onde:
+          </p>
+          <ul class="slide-list">
+            <li><span class="bullet-dot"></span><span>Na primeira cena, o ambiente é quente, com luz amarelada e textura de filme.</span></li>
+            <li><span class="bullet-dot"></span><span>Na segunda, parece um render 3D super limpo, com luz branca de hospital.</span></li>
+            <li><span class="bullet-dot"></span><span>Na terceira, vira quase um cartoon semi-realista.</span></li>
+          </ul>
+          <p>
+            Separadamente, as cenas podem até ser bonitas. Mas juntas, o vídeo perde cara de campanha e vira <strong>montagem de testes</strong>.
+            Consistência é o que transformaria isso em um universo único.
+          </p>
+
+          <div class="slide-section-title">2. Precisão – falar exatamente o que você quer que a IA faça</div>
+          <p>
+            <strong>Precisão</strong> é o quanto você consegue traduzir a ideia em instruções claras.
+            Em vez de “um take legal de comida”, você passa a descrever:
+          </p>
+          <ul class="slide-list">
+            <li><span class="bullet-dot"></span><span>Que prato é, em qual etapa (cru, preparo, final).</span></li>
+            <li><span class="bullet-dot"></span><span>Que plano é (macro, close, 45°, top shot).</span></li>
+            <li><span class="bullet-dot"></span><span>Que sensação precisa passar (caseiro, gourmet, luxo, conforto).</span></li>
+          </ul>
+
+          <div class="slide-example-label">Exemplo – prompt impreciso vs. preciso</div>
+          <p><strong>Impreciso:</strong></p>
+          <div class="code-block">
+“Um prato de massa bonito em um restaurante.”
+          </div>
+
+          <p><strong>Preciso:</strong></p>
+          <div class="code-block">
+“Cinematic 45-degree close-up of a creamy fettuccine alfredo served on a matte white plate,
+on a wooden restaurant table, warm evening lighting, subtle steam rising, Arri Alexa Mini LF, 50mm lens,
+soft depth of field, cozy and inviting mood, commercial food photography style”
+          </div>
+
+          <p>
+            A precisão não é sobre encher de palavras; é sobre <strong>escolher as palavras certas</strong>, que tocam câmera, luz, textura e emoção.
+          </p>
+
+          <div class="slide-section-title">3. Realismo – parecer filmado, não “gerado”</div>
+          <p>
+            <strong>Realismo</strong> não significa que tudo precisa ser hiper-real o tempo todo, mas que o vídeo
+            <strong>convence</strong> dentro da proposta visual escolhida.
+          </p>
+          <p>
+            Em trabalhos mais cinematográficos, isso inclui:
+          </p>
+          <ul class="slide-list">
+            <li><span class="bullet-dot"></span><span>Óptica crível (distorções, desfoque, flare, grão de filme).</span></li>
+            <li><span class="bullet-dot"></span><span>Comportamento físico convincente (líquidos, fumaça, tecidos).</span></li>
+            <li><span class="bullet-dot"></span><span>Ausência de artefatos bizarros (mãos deformadas, textos malformados, proporções erradas).</span></li>
+          </ul>
+
+          <div class="slide-example-label">Exemplo – ajustando realismo em um take de drink</div>
+          <p>
+            Você pede um take de um drink. O primeiro resultado vem perfeito em composição, mas:
+          </p>
+          <ul class="slide-list">
+            <li><span class="bullet-dot"></span><span>O líquido parece viscoso demais, quase gelatina.</span></li>
+            <li><span class="bullet-dot"></span><span>As gotas no copo estão “grudadas” de um jeito estranho.</span></li>
+          </ul>
+          <p>
+            Ao invés de aceitar esse take, você refina o prompt:
+          </p>
+          <div class="code-block">
+“realistic liquid physics, natural splash shapes, physically accurate droplets, no surreal distortions”
+          </div>
+          <p>
+            E, se necessário, corrige detalhes na pós (composição, máscara, substituição de partes) para chegar no realismo que a peça exige.
+          </p>
+
+          <div class="slide-section-title">4. Usando os 3 pilares como checklist</div>
+          <p>
+            A partir deste bloco, sempre que você olhar para um take ou para um vídeo inteiro, faça três perguntas:
+          </p>
+          <ul class="slide-list">
+            <li><span class="bullet-dot"></span><span><strong>Consistência:</strong> isso parece parte do mesmo universo que o resto do projeto?</span></li>
+            <li><span class="bullet-dot"></span><span><strong>Precisão:</strong> o que eu pedi está realmente ali, ou o modelo “inventou” outra coisa?</span></li>
+            <li><span class="bullet-dot"></span><span><strong>Realismo:</strong> dentro da estética escolhida, isso convence?</span></li>
+          </ul>
+
+          <p>
+            Se a resposta for “não” em qualquer um dos três, você sabe que ainda é hora de ajustar prompt, refazer take ou corrigir na pós.
+            Esse pequeno checklist é o que separa um processo profissional de uma sequência infinita de testes aleatórios.
+          </p>
+        </div>
+
+        <aside class="slide-aside">
+          <div class="aside-label">OS 3 PILARES</div>
+          <div class="aside-title">Como tomar decisão de forma objetiva</div>
+          <div class="aside-text">
+            • <strong>Consistência</strong>: tudo parece parte do mesmo filme.<br>
+            • <strong>Precisão</strong>: o que você imaginou aparece, de fato, na tela.<br>
+            • <strong>Realismo</strong>: dentro da proposta visual, o resultado convence.<br><br>
+            Esses três pontos viram o seu <strong>critério de qualidade</strong> em qualquer produção com IA:
+            se algo falhar em um deles, você sabe exatamente onde atuar – no prompt, na geração ou na pós.
+          </div>
+          <div class="aside-tags">
+            <span class="tag">CONSISTÊNCIA</span>
+            <span class="tag">PRECISÃO</span>
+            <span class="tag">REALISMO</span>
+            <span class="tag">CHECKLIST</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="slide-footer">
+        <span>BLOCO 4 • 3 PILARES: CONSISTÊNCIA, PRECISÃO, REALISMO</span>
+        <div class="footer-line"></div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

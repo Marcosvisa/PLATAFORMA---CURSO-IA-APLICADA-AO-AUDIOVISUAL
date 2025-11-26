@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
+<title>Bloco 8 — Frames Perfeitos para Animação</title>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#05070c;color:#ededed;font-family:Inter,Arial,sans-serif;padding:40px;display:flex;justify-content:center}
+.deck{max-width:1200px;width:100%}
+.slide{background:#0a0f18;border:1px solid #00e4ff55;box-shadow:0 0 40px #00e4ff55;padding:44px;border-radius:22px}
+h1{font-size:34px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.subtitle{font-size:16px;color:#8af0ff;letter-spacing:0.15em;margin-bottom:30px}
+.section{font-size:22px;margin-top:32px;margin-bottom:14px;color:#8af0ff;text-transform:uppercase}
+p{font-size:17px;line-height:1.75;margin-bottom:14px;color:#d0d6e0}
+ul{margin-left:24px;margin-bottom:16px}
+li{margin-bottom:10px;font-size:16px;line-height:1.65}
+.code{background:#000d14;border:1px solid #00e4ff88;padding:16px;border-radius:10px;font-family:JetBrains Mono,ui-monospace,monospace;font-size:14px;white-space:pre-wrap;color:#9cecff;margin-bottom:22px}
+</style>
+</head>
+<body>
+<div class='deck'>
+<div class='slide'>
+<h1>Bloco 8 — Frames Perfeitos para Animação</h1>
+<div class='subtitle'>KEYFRAMES PRONTOS PARA MOVIMENTO</div>
+
+<p>
+Neste bloco vamos aprofundar a arte de criar <strong>frames perfeitos para animação</strong>.  
+Não é qualquer still bonito que serve de base para vídeo. Um frame “animável” precisa ser pensado como
+um <strong>keyframe profissional</strong>: limpo, coerente, com profundidade e com potencial de movimento.
+</p>
+
+<div class='section'>1. O que é um frame “animável” de verdade?</div>
+
+<p>Um frame perfeito para animação precisa cumprir quatro critérios principais:</p>
+
+<ul>
+<li><strong>Foco visual claro</strong> — o olhar do espectador precisa saber para onde ir instantaneamente.</li>
+<li><strong>Profundidade</strong> — elementos em foreground, midground e background, permitindo parallax.</li>
+<li><strong>Coerência de luz e perspectiva</strong> — nada parece “colado” ou fora do lugar.</li>
+<li><strong>Ausência de ruídos desnecessários</strong> — quanto menos distrações, melhor o movimento.</li>
+</ul>
+
+<p>
+Um erro comum é se apaixonar por um frame super “cheio” de informação e tentar animá-lo.  
+O resultado tende a ficar confuso, com muitos elementos se deformando em movimento.
+</p>
+
+<div class='section'>2. Escolha de enquadramento para animação</div>
+
+<p>Alguns enquadramentos funcionam muito melhor como base para vídeo, principalmente em IA:</p>
+
+<ul>
+<li><strong>Macro / close extremo</strong> (food, produto) — ideal para leves movimentos de câmera, micro parallax e foco em textura.</li>
+<li><strong>Plano 45°</strong> (comida em mesa, produtos sobre superfície) — dá ótima sensação de volume.</li>
+<li><strong>Top shot organizado</strong> — perfeito para composições de mesa, bancada ou flat lay.</li>
+<li><strong>Medium shot com boa separação de fundo</strong> — excelente para lifestyle, personagens e cenas de restaurante.</li>
+</ul>
+
+<div class='code'>
+Exemplo de prompt pensando animação:
+“45-degree close-up of a gourmet pasta dish on a wooden table,
+Arri Alexa Mini LF, 50mm lens, shallow depth of field,
+clean background, clear separation between plate and background,
+commercial food photography, cinematic lighting”
+</div>
+
+<p>Note como a separação de planos (prato bem destacado do fundo) já foi pensada no prompt.</p>
+
+<div class='section'>3. Evitando elementos problemáticos</div>
+
+<p>Alguns elementos são notoriamente difíceis para modelos de vídeo e devem ser tratados com cautela:</p>
+
+<ul>
+<li><strong>Texto em rótulos e placas</strong> — tende a “derreter” em movimento.</li>
+<li><strong>Elementos muito finos</strong> (fios, grades, padrões muito complexos) — vibram e piscam.</li>
+<li><strong>Repetições muito regulares</strong> (padrões geométricos infinitos) — geram artefatos e flicker.</li>
+</ul>
+
+<p>
+Sempre que possível, simplifique esses elementos no frame base e, se necessário,  
+<span style='font-weight:600'>adicione texto ou detalhes finos depois, na pós, via motion design.</span>
+</p>
+
+<div class='section'>4. Uso estratégico de negative tokens</div>
+
+<p>Antes de animar, vale “limpar” o frame com negativos:</p>
+
+<div class='code'>
+--no extra limbs, --no distorted objects,  
+--no text, --no watermark, --no glitch,  
+--no heavy motion blur, --no cartoon style
+</div>
+
+<p>
+Isso reduz muito a chance de artefatos estranhos se amplificarem quando você gerar vídeo a partir desse frame.
+</p>
+
+<div class='section'>5. Como testar rapidamente se um frame funciona para animação</div>
+
+<p>Checklist prático antes de aprovar um frame:</p>
+
+<ul>
+<li>Consigo enxergar claramente qual é o foco?</li>
+<li>Há separação entre sujeito e fundo (por luz ou desfoque)?</li>
+<li>Consigo imaginar pelo menos um movimento de câmera interessante em cima desse quadro?</li>
+<li>Há algum elemento que certamente vai “bugar” quando mexer (mãos esquisitas, texto, padrões complicados)?</li>
+</ul>
+
+<p>Se três respostas forem “sim” e nenhuma bandeira vermelha grave aparecer, o frame é um bom candidato.</p>
+
+<div class='section'>6. Estratégias diferentes por nicho</div>
+
+<h3>Food</h3>
+<ul>
+<li>Trabalhar muito com macro e close.</li>
+<li>Highlight de textura (molho escorrendo, vapor, brilho controlado).</li>
+<li>Fundos simples, porém com contexto (restaurante, cozinha profissional, mesa de madeira).</li>
+</ul>
+
+<h3>Imobiliário</h3>
+<ul>
+<li>Planos amplos com linhas retas e verticais corrigidas.</li>
+<li>Boa leitura de profundidade (hall → sala → varanda).</li>
+<li>Frames com composição que permitam pan ou dolly suaves.</li>
+</ul>
+
+<h3>Produto</h3>
+<ul>
+<li>Objetos bem recortados de fundo, com reflexos controlados.</li>
+<li>Luz coerente com a linguagem da marca (luxo, tech, clean, jovem).</li>
+<li>Espaço em volta do produto para possíveis movimentos de câmera.</li>
+</ul>
+
+<div class='section'>7. Construindo uma biblioteca de frames</div>
+
+<p>
+Um passo avançado é criar sua própria <strong>biblioteca de frames</strong>:  
+um acervo pessoal de imagens pensadas exatamente para animação.
+</p>
+
+<ul>
+<li>Frames de pratos em diferentes ângulos (macro, 45°, top shot).</li>
+<li>Frames de ambientes de restaurante, bar, cafeteria, escritório.</li>
+<li>Frames de produtos isolados, prontos para receber variações de cor, rótulo, textura.</li>
+</ul>
+
+<p>
+Com uma biblioteca assim, você consegue desenvolver campanhas inteiras reutilizando frames-base,
+apenas trocando detalhes ou contexto em cada job.
+</p>
+
+<div class='section'>8. Casando frames com o tipo de movimento desejado</div>
+
+<p>Exemplos:</p>
+
+<ul>
+<li><strong>Leve dolly-in:</strong> precisa de profundidade clara e foco absoluto em um elemento.</li>
+<li><strong>Orbit suave em torno de um objeto:</strong> objeto central isolado, fundo relativamente limpo.</li>
+<li><strong>Pan lateral rodando sobre uma mesa:</strong> disposição harmoniosa de itens em linha ou em arco.</li>
+</ul>
+
+<div class='code'>
+Exemplo de prompt já pensando no movimento:
+“Top-down shot of a wooden table with an elegant arrangement of coffee cups and croissants,
+even spacing between elements, negative space for camera movement,
+cinematic soft window light, subtle shadows”
+</div>
+
+<p>
+Perceba: “even spacing” e “negative space for camera movement” já deixam o frame
+<strong>pronto para receber um pan ou orbit suave</strong> em cima.
+</p>
+
+<div class='section'>9. Conclusão do bloco</div>
+
+<p>
+Frames perfeitos para animação não nascem por acaso.  
+Eles são <strong>desenhados</strong> com intenção cinematográfica:
+</p>
+
+<ul>
+<li>clareza de foco;</li>
+<li>profundidade planejada;</li>
+<li>limpeza visual;</li>
+<li>coerência óptica.</li>
+</ul>
+
+<p>
+A partir deste bloco, você não vai mais “ver imagens bonitas”.
+Vai começar a enxergar <strong>keyframes cinematográficos prontos para ganhar vida em vídeo</strong>.
+</p>
+
+</div>
+</div>
+</body>
+</html>

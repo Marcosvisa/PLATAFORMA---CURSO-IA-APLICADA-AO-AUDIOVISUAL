@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
+<title>Bloco 9 — Frame Inicial & Frame Final</title>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#05070c;color:#ededed;font-family:Inter,Arial,sans-serif;padding:40px;display:flex;justify-content:center}
+.deck{max-width:1200px;width:100%}
+.slide{background:#0a0f18;border:1px solid #00e4ff55;box-shadow:0 0 40px #00e4ff55;padding:44px;border-radius:22px}
+h1{font-size:34px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.subtitle{font-size:16px;color:#8af0ff;letter-spacing:0.15em;margin-bottom:30px}
+.section{font-size:22px;margin-top:32px;margin-bottom:14px;color:#8af0ff;text-transform:uppercase}
+p{font-size:17px;line-height:1.75;margin-bottom:14px;color:#d0d6e0}
+ul{margin-left:24px;margin-bottom:16px}
+li{margin-bottom:10px;font-size:16px;line-height:1.65}
+.code{background:#000d14;border:1px solid #00e4ff88;padding:16px;border-radius:10px;font-family:JetBrains Mono,ui-monospace,monospace;font-size:14px;white-space:pre-wrap;color:#9cecff;margin-bottom:22px}
+</style>
+</head>
+<body>
+<div class='deck'>
+<div class='slide'>
+<h1>Bloco 9 — Frame Inicial & Frame Final</h1>
+<div class='subtitle'>CONTROLANDO O ARCO DA CENA</div>
+
+<p>
+Este bloco aprofunda um conceito que muda completamente o controle que você tem sobre o vídeo com IA:
+<strong>trabalhar com frame inicial e frame final</strong>.  
+É a forma mais direta de dizer à IA:
+</p>
+
+<p><em>“Comece daqui. Termine aqui. Preencha o caminho no meio.”</em></p>
+
+<div class='section'>1. Pensando como animador-chefe</div>
+
+<p>
+Na animação clássica, o animador-chefe desenha os principais quadros (keyframes)
+e o time faz os intermediários (in-between).  
+Aqui, você é o animador-chefe, e a IA faz os in-betweens.
+</p>
+
+<p>Vantagens:</p>
+<ul>
+<li>Você controla o estado inicial e o estado final com precisão;</li>
+<li>Constrói movimentos de transformação muito claros;</li>
+<li>Evita que o modelo “invente” finais indesejados.</li>
+</ul>
+
+<div class='section'>2. O que define um bom frame inicial</div>
+
+<p>O frame inicial precisa:</p>
+
+<ul>
+<li>Estabelecer o contexto da cena (ambiente, objeto, personagem);</li>
+<li>Ser visualmente legível e limpo;</li>
+<li>Já estar enquadrado como você imagina o começo do plano.</li>
+</ul>
+
+<p>
+Exemplo: um copo completamente vazio sobre o balcão, bem centralizado,
+com ambiente do bar ao fundo desfocado.
+</p>
+
+<div class='section'>3. O que define um bom frame final</div>
+
+<p>O frame final precisa:</p>
+
+<ul>
+<li>Mostrar o resultado desejado da ação;</li>
+<li>Manter coerência de câmera, lente e luz com o frame inicial;</li>
+<li>Evitar mudanças de composição tão grandes que confundam o modelo.</li>
+</ul>
+
+<p>Exemplo: o mesmo copo, no mesmo lugar e enquadramento, agora cheio de bebida,
+com espuma ou gotas, atmosfera visual idêntica.</p>
+
+<div class='section'>4. Regras de ouro de consistência entre A e B</div>
+
+<ul>
+<li><strong>Mesma lente:</strong> não mudar de 35mm para “aparência de 85mm” entre A e B.</li>
+<li><strong>Mesma posição da câmera:</strong> não mudar altura ou ângulo de forma extrema.</li>
+<li><strong>Mesma luz:</strong> direção e intensidade de luz muito próximas.</li>
+<li><strong>Mesmo estilo de textura:</strong> se usar film grain em A, mantenha em B.</li>
+</ul>
+
+<p>
+Quando A e B são muito diferentes, o modelo tenta “inventar” um caminho impossível
+e surgem distorções, flickers e mudanças bruscas.
+</p>
+
+<div class='section'>5. Tipos de transformação ideais para A → B</div>
+
+<ul>
+<li><strong>Transformações físicas simples:</strong> enchendo copos, fatiando alimentos, girando produtos.</li>
+<li><strong>Alterações de estado:</strong> cru → cozido, fechado → aberto, apagado → aceso.</li>
+<li><strong>Movimentos de câmera suaves:</strong> mudança de leve framing ou distância aparente.</li>
+</ul>
+
+<div class='code'>
+Exemplo:
+Frame A: caixa de produto fechada em cima da mesa.  
+Frame B: a mesma caixa aberta, revelando o conteúdo, mesma posição de câmera e luz.
+</div>
+
+<div class='section'>6. Construindo prompts pensados para A & B</div>
+
+<p>
+Você pode (e deve) escrever prompts específicos para cada frame,
+mesmo que eles não apareçam no vídeo final, apenas sirvam de base.
+</p>
+
+<div class='code'>
+Prompt Frame Inicial:
+“Product box closed on a wooden table, centered in frame,
+Arri Alexa Mini LF, 50mm lens, soft daylight from the side,
+clean background, cinematic commercial style”
+
+Prompt Frame Final:
+“Same scene, same composition, same lighting,
+but the product box is now open, revealing the content inside,
+neatly arranged, premium look”
+</div>
+
+<p>Esses dois frames formam um arco perfeito para a IA preencher com um movimento de abertura.</p>
+
+<div class='section'>7. Quando NÃO usar frame final</div>
+
+<p>Você não precisa de frame final em todas as situações. Em muitos casos, basta:</p>
+
+<ul>
+<li>um bom frame inicial;</li>
+<li>um prompt de movimento de câmera claro (dolly, pan, tilt, orbit).</li>
+</ul>
+
+<p>
+Use frame final principalmente quando:
+</p>
+<ul>
+<li>o <strong>estado final</strong> é crítico (produto posicionado de forma exata, transformação específica);</li>
+<li>é importante que o final seja exatamente igual a uma arte aprovada pelo cliente.</li>
+</ul>
+
+<div class='section'>8. Erros comuns no uso de A & B</div>
+
+<ul>
+<li><strong>Trocar o estilo entre A e B</strong> — ex: A realista, B com cara de 3D cartoon.</li>
+<li><strong>Trocar o negócio de lugar</strong> — ex: objeto muito deslocado no quadro em B.</li>
+<li><strong>Introduzir elementos novos demais</strong> — B com muitos itens que não existiam em A.</li>
+</ul>
+
+<p>
+Lembre: A e B devem parecer, para um humano, a mesma cena em dois momentos do tempo.  
+Se parecer outra cena, a IA vai tentar “teletransportar” tudo.
+</p>
+
+<div class='section'>9. Conclusão do bloco</div>
+
+<p>
+Trabalhar com frame inicial e final é uma forma madura de dirigir IA para vídeo.  
+Você passa a:
+</p>
+
+<ul>
+<li>controlar o arco visual;</li>
+<li>definir claramente o começo e o fim de cada micro-história;</li>
+<li>dar menos margem para o modelo inventar coisas inúteis.</li>
+</ul>
+
+<p>
+A partir daqui, comece a pensar cada plano complexo como uma trajetória A → B  
+e use a IA para preencher o que está entre esses dois pontos.
+</p>
+
+</div>
+</div>
+</body>
+</html>

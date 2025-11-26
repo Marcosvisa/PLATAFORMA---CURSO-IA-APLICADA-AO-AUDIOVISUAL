@@ -3,7 +3,7 @@ Plataforma para acesso do Curso de IA Aplicada ao Audiovisul.
 
 ## 📋 Funcionalidades
 - **Menu Inteligente** 
-- **Navegação Intuitiva** p
+- **Navegação Intuitiva** 
 - **Imersão no Conteúdo** 
 
 ## 📁 Estrutura do Projeto

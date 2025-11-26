@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>IA Aplicada ao Audiovisual – Bloco 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top, #101622 0, #05070c 40%, #020308 100%);
+      color: #ededed;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 16px 48px;
+      gap: 24px;
+    }
+    .deck {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .slide {
+      position: relative;
+      border-radius: 24px;
+      padding: 32px 40px;
+      background: radial-gradient(circle at top left, rgba(0,228,255,0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(0,228,255,0.12), transparent 55%),
+                  #05070c;
+      border: 1px solid rgba(0,228,255,0.18);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 26px 60px rgba(0,0,0,0.85),
+        0 0 120px rgba(0,228,255,0.08);
+      overflow: hidden;
+    }
+    .slide::before,
+    .slide::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00e4ff, transparent);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .slide::before {
+      top: 0;
+    }
+    .slide::after {
+      bottom: 0;
+    }
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+    .slide-kicker {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #7e8a94;
+    }
+    .slide-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(0,228,255,0.25);
+    }
+    .slide-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.65);
+      background: rgba(5,9,16,0.8);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .slide-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #00e4ff;
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+    }
+    .slide-body {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .slide-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    .slide-main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .slide-main p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #c8d0da;
+    }
+    .slide-main-hero {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+    .slide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .slide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #d0d7e2;
+    }
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 5px;
+      background: radial-gradient(circle, #00e4ff, #0096b5);
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+      flex-shrink: 0;
+    }
+    .slide-aside {
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(0,228,255,0.45);
+      background: linear-gradient(145deg, rgba(8,16,24,0.95), rgba(4,8,16,0.96));
+      box-shadow: 0 0 32px rgba(0,228,255,0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .aside-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+    }
+    .aside-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+    .aside-text {
+      font-size: 14px;
+      color: #c0cad8;
+      line-height: 1.6;
+    }
+    .aside-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.28);
+      color: #9be9ff;
+      background: rgba(3,10,18,0.9);
+    }
+    .code-block {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #05070c;
+      border: 1px solid rgba(0,228,255,0.35);
+      color: #9cecff;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.7);
+    }
+    .slide-footer {
+      margin-top: 18px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #5f6a76;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,228,255,0.5), transparent);
+      margin-left: 12px;
+    }
+    .deck-title {
+      width: 100%;
+      max-width: 1400px;
+      text-align: left;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #6c7684;
+    }
+    .slide-subtitle {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      margin-top: 8px;
+    }
+    .slide-section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .slide-example-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #8af0ff;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-title">CURSO • IA APLICADA AO AUDIOVISUAL</div>
+  <main class="deck">
+
+    <!-- BLOCO 1 – IA APLICADA AO AUDIOVISUAL (VERSÃO DIDÁTICA EXPANDIDA) -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">INTRODUÇÃO</div>
+          <h1 class="slide-title">IA APLICADA AO AUDIOVISUAL</h1>
+          <div class="slide-subtitle">DO CONCEITO AO FILME FINAL</div>
+        </div>
+        <div class="slide-badge">
+          <span class="slide-badge-dot"></span>
+          WORKFLOW INTELIGENTE
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-main">
+          <p class="slide-main-hero">
+            Quando falamos em “IA aplicada ao audiovisual”, não estamos falando de apertar um botão e “deixar a máquina fazer”. Estamos falando de usar a IA como
+            um <strong>super assistente criativo e técnico</strong>, que te ajuda a transformar ideias em vídeos reais: com câmera, ritmo, textura, narrativa e
+            potencial comercial.
+          </p>
+
+          <p>
+            Neste bloco, vamos olhar para três frentes principais em que a IA muda radicalmente seu dia a dia de produção:
+            <strong>controle de câmera via texto</strong>, <strong>construção de um workflow inteligente</strong> e
+            <strong>criação de peças vendáveis para mercados específicos</strong>.
+          </p>
+
+          <!-- 1. Dominar prompts, câmeras virtuais, motion tokens e fluxos híbridos -->
+          <div class="slide-section-title">1. Dominar prompts, câmeras virtuais, motion tokens e fluxos híbridos</div>
+          <p>
+            Pense no prompt como o seu <strong>comando de direção de fotografia</strong>. Em vez de falar com um operador de câmera ou um diretor de arte,
+            você fala com o modelo de IA usando linguagem de set:
+            que lente você quer, de onde vem a luz, qual o enquadramento, qual o clima da cena.
+          </p>
+          <p>
+            Quando somamos isso a <strong>câmeras virtuais</strong> (simulações de RED, Arri, Sony, etc.), a <strong>motion tokens</strong> (comandos de
+            movimento de câmera como <em>dolly in</em>, <em>tracking shot</em>, <em>handheld</em>) e à edição tradicional, nasce o que chamamos de
+            <strong>fluxo híbrido IA + edição</strong>. Você não joga fora o que já sabe: você adiciona camadas de velocidade e experimentação.
+          </p>
+
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Prompt como “roteiro visual”:</strong> você deixa de descrever apenas “o que acontece” e passa a descrever <em>como</em> a câmera enxerga a cena.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Câmera virtual:</strong> escolhe câmeras e lentes reais para guiar a estética (por exemplo, “Arri Alexa Mini LF, 35mm anamórfica”).</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Motion tokens:</strong> define se a câmera está fixa, flutuando, seguindo personagem, simulando FPV, etc.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Fluxo híbrido:</strong> gera variações com IA, escolhe as melhores, corta, ajusta o ritmo, faz color grading e finaliza como num job tradicional.</span>
+            </li>
+          </ul>
+
+          <div class="slide-example-label">Exemplo prático – Food cinemático</div>
+          <p>
+            Suponha que você queira um take de um hambúrguer sendo montado, com pegada de comercial premium:
+          </p>
+          <div class="code-block">
+Plano: close do hambúrguer
+Câmera: Arri Alexa Mini LF, 50mm
+Luz: backlight quente, reflexos no molho
+Ação: queijo derretendo, vapor subindo, câmera fazendo um leve dolly in
+
+Prompt (resumido em linguagem de IA):
+“Cinematic close-up of a gourmet burger being assembled in slow motion, Arri Alexa Mini LF, 50mm lens, warm backlight, steam rising, sauce dripping,
+soft handheld micro-shakes, commercial food lighting, ultra detailed textures”
+          </div>
+          <p>
+            A IA gera o material com o estilo visual que você pediu. Depois você leva esse vídeo para o software de edição (Premiere, DaVinci, etc.),
+            escolhe os melhores trechos, corta no ritmo da música ou locução e faz o color grading para unificar com o resto da campanha.
+          </p>
+
+          <!-- 2. Construir um workflow inteligente -->
+          <div class="slide-section-title">2. Construir um workflow inteligente que te dá consistência, precisão e realismo</div>
+          <p>
+            Um erro comum é abrir uma ferramenta de IA e sair testando aleatoriamente, sem estrutura. Isso gera resultados bonitos isoladamente,
+            mas quase impossíveis de reaproveitar em projetos reais. O <strong>workflow inteligente</strong> organiza as etapas de forma clara:
+          </p>
+
+          <div class="code-block">
+IDEIA → ROTEIRO VISUAL → FRAMES BASE → VÍDEO IA → EDIÇÃO &amp; COLOR → ENTREGA
+          </div>
+
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Consistência:</strong> você define a cara do projeto (paleta, lente, textura, tipo de luz) e repete essas escolhas em todos os prompts e cenas.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Precisão:</strong> cada etapa tem um objetivo claro. Você sabe quando está definindo visual, quando está refinando movimento e quando está apenas montando.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Realismo:</strong> você decide quando quer que algo pareça filmado (com imperfeições ópticas, grão, flare) e quando pode aceitar algo mais estilizado.</span>
+            </li>
+          </ul>
+
+          <div class="slide-example-label">Exemplo prático – Pequeno comercial de 15s</div>
+          <p>
+            Imagine que um cliente de cafeteria te pede um vídeo de 15 segundos para redes sociais:
+          </p>
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Ideia:</strong> “De grão a xícara” – mostrar a jornada do café.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Roteiro visual:</strong> 3 cenas – grãos, extração do espresso, cliente tomando.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Frames base:</strong> gera imagens perfeitas de cada momento (grão, máquina, xícara fumegante).</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Vídeo IA:</strong> usa modelos de vídeo para criar micro-movimentos e transições (câmera se aproximando, vapor, crema do café).</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Edição &amp; color:</strong> junta tudo, corta no tempo da locução, aplica color grading quente e textura de filme.</span>
+            </li>
+          </ul>
+          <p>
+            A IA acelera o processo em todas as etapas, mas você continua decidindo o que entra e o que sai, mantendo a peça profissional.
+          </p>
+
+          <!-- 3. Entregar peças vendáveis -->
+          <div class="slide-section-title">3. Entregar peças vendáveis para publicidade, mercado imobiliário e conteúdo premium</div>
+          <p>
+            “IA aplicada ao audiovisual” só faz sentido se virar <strong>produto vendável</strong>. Ou seja: algo que um cliente reconhece como valor,
+            que você consegue precificar e entregar com consistência.
+          </p>
+
+          <p>
+            Alguns exemplos de formatos que você pode oferecer usando IA como base de produção:
+          </p>
+
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Publicidade:</strong> comerciais curtos, peças temáticas (Halloween, Natal, datas sazonais), vídeos conceito para lançamentos de produtos.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Mercado imobiliário:</strong> showreels de empreendimentos, visualizações de apartamentos, tours cinematográficos internos e externos.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Conteúdo premium:</strong> aberturas de canal, vinhetas, cenas autorais para portfólio, projetos experimentais que chamam a atenção de marcas.</span>
+            </li>
+          </ul>
+
+          <div class="slide-example-label">Exemplo prático – Imobiliária</div>
+          <p>
+            Uma imobiliária quer destacar um novo empreendimento, mas ainda não tem o vídeo tradicional pronto. Com IA aplicada ao audiovisual, você pode:
+          </p>
+          <ul class="slide-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Gerar <strong>frames conceituais</strong> das fachadas, áreas comuns e interiores, com a linguagem visual do público-alvo.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Criar <strong>vídeos curtos</strong> com câmera passeando pelos ambientes, simulando um tour em movimento.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Montar um <strong>showreel</strong> de 30–45 segundos com trilha, locução e grafismos, pronto para rodar em redes sociais e apresentações comerciais.</span>
+            </li>
+          </ul>
+
+          <p>
+            O cliente não compra “um vídeo de IA”: ele compra <strong>uma solução visual</strong> que ajuda a apresentar melhor o produto dele.
+            A IA é o motor que torna essa solução mais rápida, mais acessível e, muitas vezes, mais criativa.
+          </p>
+
+          <p>
+            Ao longo do curso, cada um desses pontos vai ser aprofundado com exemplos concretos, prompts prontos, fluxos de trabalho e projetos reais.
+            Este bloco é a sua base: entender <strong>o que a IA faz</strong>, <strong>o que você faz</strong> e <strong>como os dois se encontram</strong> para gerar resultado.
+          </p>
+        </div>
+
+        <aside class="slide-aside">
+          <div class="aside-label">RESUMO DO BLOCO</div>
+          <div class="aside-title">IA como extensão do set</div>
+          <div class="aside-text">
+            • Você usa prompts como linguagem de direção.<br>
+            • Câmeras virtuais e motion tokens simulam set real.<br>
+            • O workflow inteligente organiza o caos da experimentação.<br>
+            • O objetivo final não é “gerar coisas”, é <strong>entregar peças profissionais</strong> para mercados que pagam por vídeo bem feito.
+          </div>
+          <div class="aside-tags">
+            <span class="tag">PROMPTS</span>
+            <span class="tag">CÂMERA VIRTUAL</span>
+            <span class="tag">MOTION TOKENS</span>
+            <span class="tag">WORKFLOW</span>
+            <span class="tag">PEÇAS VENDÁVEIS</span>
+          </div>
+            
+          <video width="480" controls>
+          <source src="/videos/slow-red-retro-lights-looped-low-scale-pattern-2024-12-02-03-53-59-utc.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+
+        </aside>
+      </div>
+
+      <div class="slide-footer">
+        <span>BLOCO 1 • IA APLICADA AO AUDIOVISUAL</span>
+        <div class="footer-line"></div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

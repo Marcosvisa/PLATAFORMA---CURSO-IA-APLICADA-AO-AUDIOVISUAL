@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
+<title>Bloco 7 – Meta Tokens Avançados</title>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<style>
+body{background:#05070c;color:#ededed;font-family:Inter,Arial;padding:40px;display:flex;justify-content:center}
+.deck{max-width:1200px;width:100%}
+.slide{background:#0a0f18;border:1px solid #0ff5;box-shadow:0 0 40px #0af5;padding:44px;border-radius:22px}
+h1{font-size:34px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.subtitle{font-size:16px;color:#8af0ff;letter-spacing:0.15em;margin-bottom:30px}
+.section{font-size:22px;margin-top:32px;margin-bottom:14px;color:#8af0ff;text-transform:uppercase}
+p{font-size:17px;line-height:1.75;margin-bottom:14px;color:#d0d6e0}
+ul{margin-left:24px;margin-bottom:16px}
+li{margin-bottom:10px;font-size:16px;line-height:1.65}
+.code{background:#000d14;border:1px solid #0ff6;padding:16px;border-radius:10px;font-family:JetBrains Mono,monospace;font-size:14px;white-space:pre-wrap;color:#9cecff;margin-bottom:22px}
+</style>
+</head>
+<body>
+<div class='deck'>
+<div class='slide'>
+
+<h1>BLOCO 7 — META TOKENS AVANÇADOS</h1>
+<div class='subtitle'>A LINGUAGEM OCULTA QUE CONTROLA O REALISMO</div>
+
+<p>
+Meta tokens são <strong>a gramática secreta</strong> dos modelos generativos.  
+Eles são os elementos que não aparecem no briefing do cliente, mas que determinam:
+</p>
+
+<ul>
+<li>a assinatura estética da cena,</li>
+<li>o tipo de cinema que o modelo deve imitar,</li>
+<li>a percepção de profundidade, textura e atmosfera,</li>
+<li>a coerência visual entre todos os planos do vídeo.</li>
+</ul>
+
+<p>Quando um criador domina meta tokens, ele deixa de “descrever imagens” e passa a <strong>dirigir</strong> a IA.</p>
+
+<div class='section'>1. META TOKENS DE CÂMERA: SENSOR, RESOLUÇÃO, LÓGICA DE CINEMA</div>
+
+<p>Câmeras reais carregam identidades visuais próprias. Ao usar meta tokens de câmera, você diz:</p>
+
+<p><em>“Gere a imagem como se fosse filmada com esse equipamento.”</em></p>
+
+<h3>Principais câmeras cinematográficas:</h3>
+<ul>
+<li><strong>Arri Alexa Mini LF</strong> — o “padrão-ouro” do cinema digital moderno; pele orgânica, textura suave.</li>
+<li><strong>RED Monstro 8K</strong> — hiper definição, microdetalhes, nitidez extrema.</li>
+<li><strong>Sony Venice</strong> — excelente faixa dinâmica, tons de pele muito naturais, look high-end.</li>
+</ul>
+
+<div class='code'>
+Exemplo — puxando o look Arri
+“Cinematic medium shot, Arri Alexa Mini LF, natural skin tones, soft roll-off on highlights,
+creamy bokeh, 35mm lens, subtle texture”
+</div>
+
+<p>Note que “Arri Alexa” sozinho já altera dramaticamente o tipo de imagem gerada.</p>
+
+<div class='section'>2. META TOKENS DE LENTE — A GEOMETRIA DO SEU PLANO</div>
+
+<p>Lentes controlam perspectiva, compressão e profundidade. Em IA, elas são essenciais para:</p>
+
+<ul>
+<li>manter coerência entre planos,</li>
+<li>definir a sensação espacial,</li>
+<li>garantir realismo óptico.</li>
+</ul>
+
+<h3>Guia rápido:</h3>
+<ul>
+<li><strong>24mm</strong> — ambientes amplos, leve distorção, arquitetura e interiores.</li>
+<li><strong>35mm</strong> — o clássico narrativo; equilíbrio perfeito entre personagem e ambiente.</li>
+<li><strong>50mm</strong> — natural, fiel ao olhar humano; perfeito para lifestyle.</li>
+<li><strong>85mm</strong> — retratos, compressão cinematográfica, profundidade suave.</li>
+<li><strong>100mm macro</strong> — ultra detalhes, food, produtos premium.</li>
+</ul>
+
+<div class='code'>
+Comparação:
+35mm — “Cinematic 35mm lens, narrative feel”
+vs.
+100mm macro — “extreme macro lens, hyper-detailed textures, shallow depth”
+</div>
+
+<p>Um simples ajuste de lente pode transformar completamente a narrativa visual.</p>
+
+<div class='section'>3. META TOKENS DE LUZ — O CLIMA EM PRIMEIRO LUGAR</div>
+
+<p>Luz define emoção. Quando você domina meta tokens de luz, passa a controlar o clima do vídeo:</p>
+
+<h3>Principais padrões:</h3>
+<ul>
+<li><strong>cinematic low key lighting</strong> — sombras profundas, contraste alto.</li>
+<li><strong>soft window light</strong> — suavidade, naturalidade, comercial premium.</li>
+<li><strong>golden hour backlight</strong> — calor emocional, brilho dourado, estética poética.</li>
+<li><strong>neon reflections</strong> — look cyberpunk, noturno, cores saturadas.</li>
+</ul>
+
+<div class='code'>
+Exemplo:
+“Golden hour backlight, long shadows, warm highlights, ambient occlusion on details”
+</div>
+
+<p>Esses tokens reduzem drasticamente a chance de luz “genérica” ou plana.</p>
+
+<div class='section'>4. TEXTURAS E PELÍCULAS — O FUNDAMENTO DO REALISMO</div>
+
+<p>A textura é um dos segredos mais importantes do realismo.  
+Sem textura cinematográfica, o vídeo sempre parece “IA demais”.</p>
+
+<h3>Tokens essenciais:</h3>
+<ul>
+<li><strong>Kodak Vision3 500T</strong> — look analógico quente, realista.</li>
+<li><strong>subtle halation</strong> — brilho suave nos highlights.</li>
+<li><strong>soft diffusion filter</strong> — suaviza imperfeições, look de cinema.</li>
+<li><strong>film grain</strong> — dá “cola” entre os elementos da cena.</li>
+<li><strong>lens breathing</strong> — variação real na troca de foco.</li>
+</ul>
+
+<div class='code'>
+Exemplo completo:
+“35mm anamorphic lens, Kodak Vision3 500T film grain,
+soft diffusion, subtle halation, cinematic texture, organic highlights”
+</div>
+
+<p>Isso transforma qualquer prompt genérico em cinema.</p>
+
+<div class='section'>5. META TOKENS DE MOVIMENTO (PARA VÍDEO)</div>
+
+<p>Motion tokens controlam como a câmera se move:</p>
+
+<ul>
+<li><strong>smooth dolly-in</strong> — movimento profissional, sem jitter.</li>
+<li><strong>handheld micro jitter</strong> — estética documental premium.</li>
+<li><strong>slow parallax</strong> — profundidade realista.</li>
+<li><strong>floating cinematic camera</strong> — movimento suave, tipo drone indoor.</li>
+<li><strong>macro tracking shot</strong> — close perseguidor, ideal para comida.</li>
+</ul>
+
+<div class='code'>
+Exemplo:
+“Slow cinematic dolly-in, subtle parallax, precise depth transitions, macro tracking”
+</div>
+
+<p>Meta tokens de movimento são a faca afiada do vídeo com IA.</p>
+
+<div class='section'>6. CRIANDO COMBOS PROFISSIONAIS (RECEITAS)</div>
+
+<p>Aqui estão receitas prontas, usadas por videomakers profissionais para padronizar resultados.</p>
+
+<h3>Food cinematográfico:</h3>
+<div class='code'>
+“Arri Alexa Mini LF, 100mm macro lens,
+warm backlight, commercial food lighting,
+ultra-detailed textures, Kodak Vision3 film grain, subtle halation”
+</div>
+
+<h3>Imobiliário:</h3>
+<div class='code'>
+“24mm architectural lens, straight verticals, natural daylight,
+soft ambient bounce, clean whites, high dynamic range”
+</div>
+
+<h3>Produto luxo:</h3>
+<div class='code'>
+“85mm lens, dramatic low key lighting, deep blacks,
+crisp reflections, cinematic contrast curve”
+</div>
+
+<div class='section'>7. O QUE NUNCA MISTURAR</div>
+
+<p>Para evitar inconsistência:</p>
+
+<ul>
+<li>Não misture lentes diferentes no mesmo plano.</li>
+<li>Não use “golden hour” e “neon cyberpunk” no mesmo vídeo.</li>
+<li>Não combine texturas opostas (por ex: “digital sharp + film grain pesado”).</li>
+</ul>
+
+<p>Coerência é rei.</p>
+
+<div class='section'>8. A REGRA DE OURO: META TOKENS PRIMEIRO, CENA DEPOIS</div>
+
+<p>
+Profissionais começam pensando em:
+</p>
+
+<ul>
+<li>qual é a assinatura visual,</li>
+<li>qual é a paleta,</li>
+<li>qual é o tipo de lente e luz.</li>
+</ul>
+
+<p>
+Só depois escrevem a descrição da cena.  
+Meta tokens são o <strong>esqueleto cinematográfico</strong> do vídeo.
+</p>
+
+</div>
+</div>
+</body>
+</html>

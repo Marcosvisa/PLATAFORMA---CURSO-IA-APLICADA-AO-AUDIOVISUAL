@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>IA Aplicada ao Audiovisual – Fundamentos da IA no Audiovisual</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top, #101622 0, #05070c 40%, #020308 100%);
+      color: #ededed;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 16px 48px;
+      gap: 24px;
+    }
+    .deck {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .slide {
+      position: relative;
+      border-radius: 24px;
+      padding: 32px 40px;
+      background: radial-gradient(circle at top left, rgba(0,228,255,0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(0,228,255,0.12), transparent 55%),
+                  #05070c;
+      border: 1px solid rgba(0,228,255,0.18);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 26px 60px rgba(0,0,0,0.85),
+        0 0 120px rgba(0,228,255,0.08);
+      overflow: hidden;
+    }
+    .slide::before,
+    .slide::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00e4ff, transparent);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .slide::before { top: 0; }
+    .slide::after { bottom: 0; }
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+    .slide-kicker {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #7e8a94;
+    }
+    .slide-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(0,228,255,0.25);
+    }
+    .slide-subtitle {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      margin-top: 8px;
+    }
+    .slide-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.65);
+      background: rgba(5,9,16,0.8);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .slide-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #00e4ff;
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+    }
+    .slide-body {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .slide-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    .slide-main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .slide-main p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #c8d0da;
+    }
+    .slide-main-hero {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+    .slide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .slide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #d0d7e2;
+    }
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 5px;
+      background: radial-gradient(circle, #00e4ff, #0096b5);
+      box-shadow: 0 0 10px rgba(0,228,255,0.9);
+      flex-shrink: 0;
+    }
+    .slide-aside {
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(0,228,255,0.45);
+      background: linear-gradient(145deg, rgba(8,16,24,0.95), rgba(4,8,16,0.96));
+      box-shadow: 0 0 32px rgba(0,228,255,0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .aside-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8af0ff;
+    }
+    .aside-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+    .aside-text {
+      font-size: 14px;
+      color: #c0cad8;
+      line-height: 1.6;
+    }
+    .aside-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,228,255,0.28);
+      color: #9be9ff;
+      background: rgba(3,10,18,0.9);
+    }
+    .code-block {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #05070c;
+      border: 1px solid rgba(0,228,255,0.35);
+      color: #9cecff;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.7);
+    }
+    .slide-footer {
+      margin-top: 18px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #5f6a76;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,228,255,0.5), transparent);
+      margin-left: 12px;
+    }
+    .deck-title {
+      width: 100%;
+      max-width: 1400px;
+      text-align: left;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #6c7684;
+    }
+    .slide-section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .slide-example-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #8af0ff;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+  
+  </style>
+</head>
+<body>
+  <div class="deck-title">CURSO • IA APLICADA AO AUDIOVISUAL</div>
+  <main class="deck">
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">BLOCO 3</div>
+          <h1 class="slide-title">Fundamentos da IA no Audiovisual</h1>
+          <div class="slide-subtitle">IMAGEM, VÍDEO, ÁUDIO E O PAPEL DO HUMANO</div>
+        </div>
+        <div class="slide-badge">
+          <span class="slide-badge-dot"></span>
+          BASE TÉCNICA E CRIATIVA
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="slide-main">
+          
+<p class="slide-main-hero">
+  Antes de abrir qualquer ferramenta, é fundamental entender <strong>o que está acontecendo por trás</strong>. Não para virar pesquisador de IA,
+  mas para saber o que dá para exigir dos modelos, o que é limitação técnica e onde você realmente faz diferença como diretor(a) e montador(a).
+</p>
+
+<p>
+  Em audiovisual, trabalhamos basicamente com três grandes tipos de modelos generativos: <strong>imagem</strong>, <strong>vídeo</strong> e
+  <strong>áudio/voz</strong>. Todos eles partem de uma ideia semelhante: aprender padrões a partir de exemplos e depois gerar “novos exemplos” que
+  se parecem com aquilo que foi aprendido.
+</p>
+
+<div class="slide-section-title">1. Modelos de imagem: base para frames e conceitos</div>
+<p>
+  Os modelos de imagem são o ponto de partida para muita coisa no workflow com IA: do concept de personagem aos frames base que você vai animar depois.
+  Eles funcionam muito bem para:
+</p>
+<ul class="slide-list">
+  <li><span class="bullet-dot"></span><span><strong>Explorar direções visuais</strong> rapidamente (procurar “a cara” de uma campanha).</span></li>
+  <li><span class="bullet-dot"></span><span><strong>Gerar frames hero</strong> para serem animados ou usados como stills.</span></li>
+  <li><span class="bullet-dot"></span><span><strong>Testar composições</strong> de câmera, paleta de cor e iluminação.</span></li>
+</ul>
+
+<div class="slide-example-label">Exemplo – concept de personagem para campanha</div>
+<p>
+  Você precisa de um “chefe de cozinha carismático” para uma série de vídeos de uma hamburgueria. Em vez de contratar alguém só para testes,
+  você gera variações com IA até chegar em um visual que o cliente gosta. A partir daí, você pode:
+</p>
+<ul class="slide-list">
+  <li><span class="bullet-dot"></span><span>Usar o personagem como <strong>referência visual</strong> para casting.</span></li>
+  <li><span class="bullet-dot"></span><span>Criar <strong>arts</strong> para redes sociais antes mesmo de filmar.</span></li>
+  <li><span class="bullet-dot"></span><span>Montar um <strong>storyboard visual</strong> com o “chef IA” em diferentes situações.</span></li>
+</ul>
+
+<div class="slide-section-title">2. Modelos de vídeo: movimento, câmera e tempo</div>
+<p>
+  Modelos de vídeo levam a lógica da imagem para o movimento: em vez de um frame, você gera uma sequência. Aqui entram dois conceitos chave:
+  <strong>coerência temporal</strong> (as coisas não “pularem” de um frame para o outro) e <strong>motion</strong> (como a câmera e os elementos se movem).
+</p>
+<p>
+  Em prática, você pode usar:
+</p>
+<ul class="slide-list">
+  <li><span class="bullet-dot"></span><span><strong>Vídeo direto de texto</strong> (text-to-video): você descreve a cena e o modelo gera o plano inteiro.</span></li>
+  <li><span class="bullet-dot"></span><span><strong>Vídeo a partir de frames</strong> (image-to-video): você dá um frame inicial (e às vezes final) e a IA cria o movimento entre eles.</span></li>
+</ul>
+
+<div class="slide-example-label">Exemplo – transformar um frame em micro-take</div>
+<p>
+  Você tem um frame perfeito de um drink, gerado em IA. Em vez de deixar isso parado, usa um modelo de vídeo para criar um movimento suave de câmera:
+  um leve dolly in, um giro de 10–15°, ou uma vibração de câmera de mão. Isso já vira um take usável em edição.
+</p>
+
+<div class="slide-section-title">3. Modelos de áudio e voz: locução e textura sonora</div>
+<p>
+  Modelos de voz e áudio entram como uma camada a mais: locuções, efeitos, texturas sonoras. Eles não substituem um sound designer,
+  mas resolvem muito bem:
+</p>
+<ul class="slide-list">
+  <li><span class="bullet-dot"></span><span><strong>Guias de locução</strong> (para aprovar texto com cliente antes de gravar com locutor real).</span></li>
+  <li><span class="bullet-dot"></span><span><strong>Locuções finais</strong> em projetos menores, onde um modelo de voz bem configurado já segura o resultado.</span></li>
+  <li><span class="bullet-dot"></span><span><strong>Exploração de tom</strong> (mais sério, mais leve, mais jovem, mais institucional).</span></li>
+</ul>
+
+<div class="slide-section-title">4. O lugar do humano nisso tudo</div>
+<p>
+  Entender os fundamentos serve para uma coisa: <strong>saber onde você é insubstituível</strong>. A IA não decide:
+</p>
+<ul class="slide-list">
+  <li><span class="bullet-dot"></span><span>O que faz sentido para a marca.</span></li>
+  <li><span class="bullet-dot"></span><span>O que comunica com o público certo.</span></li>
+  <li><span class="bullet-dot"></span><span>O que é elegante, exagerado, cafona ou genial.</span></li>
+</ul>
+<p>
+  É você quem escolhe a direção. A IA é o motor que te permite testar, refazer e refinar muito mais rápido do que antes.
+</p>
+
+        </div>
+        <aside class="slide-aside">
+          <div class="aside-label">POR QUE ISSO IMPORTA</div>
+          <div class="aside-title">Fundação para tudo que vem depois</div>
+          <div class="aside-text">
+            
+• Entender os tipos de modelo evita frustração.<br>
+• Imagem, vídeo e áudio trabalham juntos no seu workflow.<br>
+• Você não precisa saber matemática de IA, mas precisa saber <strong>onde ela é forte e onde ela é fraca</strong>.<br>
+• Quanto mais clareza você tiver dos fundamentos, mais vai conseguir extrair resultados profissionais sem perder tempo em “tentativa e erro” cega.
+
+          </div>
+          <div class="aside-tags">
+            <span class="tag">MODELOS DE IMAGEM</span>
+<span class="tag">MODELOS DE VÍDEO</span>
+<span class="tag">ÁUDIO & VOZ</span>
+<span class="tag">PAPEL DO DIRETOR</span>
+          </div>
+        </aside>
+      </div>
+      <div class="slide-footer">
+        <span>BLOCO 3 • FUNDAMENTOS DA IA NO AUDIOVISUAL</span>
+        <div class="footer-line"></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

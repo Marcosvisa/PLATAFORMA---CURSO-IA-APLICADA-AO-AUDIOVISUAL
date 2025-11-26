@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
+<title>Bloco 12 — Edição, Color e Finalização</title>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#05070c;color:#ededed;font-family:Inter,Arial,sans-serif;padding:40px;display:flex;justify-content:center}
+.deck{max-width:1200px;width:100%}
+.slide{background:#0a0f18;border:1px solid #00e4ff55;box-shadow:0 0 40px #00e4ff55;padding:44px;border-radius:22px}
+h1{font-size:34px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.subtitle{font-size:16px;color:#8af0ff;letter-spacing:0.15em;margin-bottom:30px}
+.section{font-size:22px;margin-top:32px;margin-bottom:14px;color:#8af0ff;text-transform:uppercase}
+p{font-size:17px;line-height:1.75;margin-bottom:14px;color:#d0d6e0}
+ul{margin-left:24px;margin-bottom:16px}
+li{margin-bottom:10px;font-size:16px;line-height:1.65}
+.code{background:#000d14;border:1px solid #00e4ff88;padding:16px;border-radius:10px;font-family:JetBrains Mono,ui-monospace,monospace;font-size:14px;white-space:pre-wrap;color:#9cecff;margin-bottom:22px}
+</style>
+</head>
+<body>
+<div class='deck'>
+<div class='slide'>
+<h1>Bloco 12 — Edição, Color e Finalização</h1>
+<div class='subtitle'>UNINDO TUDO NA ILHA</div>
+
+<p>
+Mesmo com prompts incríveis e vídeos de IA impressionantes, é na <strong>ilha de edição</strong>
+que o filme realmente nasce. Este bloco foca em como tratar material gerado por IA com o mesmo rigor
+que qualquer filmagem profissional: edição, color e finalização.
+</p>
+
+<div class='section'>1. Princípios de edição para material IA</div>
+
+<p>
+Na timeline, todo plano é plano — não importa se veio de câmera real ou de IA.
+Os princípios clássicos seguem valendo:
+</p>
+
+<ul>
+<li><strong>Função de cada plano:</strong> abrir, explicar, emocionar, vender, respirar.</li>
+<li><strong>Ritmo:</strong> cortes mais rápidos ou mais lentos conforme objetivo.</li>
+<li><strong>Continuidade:</strong> evitar “saltos” visuais que quebram a imersão.</li>
+</ul>
+
+<p>
+Ao montar, pergunte constantemente:
+</p>
+
+<p><em>“Este plano melhora o vídeo ou está aqui só porque é bonito?”</em></p>
+
+<div class='section'>2. Organização na timeline</div>
+
+<p>Uma estrutura comum:</p>
+
+<ul>
+<li>Pista de vídeo principal com os planos IA selecionados.</li>
+<li>Pistas de overlays (textos, grafismos, logos, efeitos de partículas).</li>
+<li>Pistas de áudio: locução, música, efeitos, som ambiente.</li>
+</ul>
+
+<p>
+Trate os takes IA como se fossem takes de câmera que você escolheu no set:
+apenas os melhores entram, o resto vira material de apoio.
+</p>
+
+<div class='section'>3. Color grading para unificar o look</div>
+
+<p>
+Mesmo com meta tokens iguais, modelos podem gerar variações sutis entre planos:
+</p>
+
+<ul>
+<li>diferença de contraste;</li>
+<li>mudanças de temperatura de cor;</li>
+<li>mais ou menos saturação.</li>
+</ul>
+
+<p>
+O color grading entra para:
+</p>
+
+<ul>
+<li>ajustar exposição e contraste;</li>
+<li>harmonizar a temperatura de cor;</li>
+<li>aplicar uma curva de cor e textura global.</li>
+</ul>
+
+<div class='code'>
+Exemplo de pipeline de color:
+1) Correção primária (exposição, contraste, balanço de branco);  
+2) Correção secundária (peles, produto, áreas específicas);  
+3) Look final (LUT, film emulation, grain, halation).
+</div>
+
+<div class='section'>4. Film grain, halation e textura unificadora</div>
+
+<p>
+Adicionar textura controlada é uma forma poderosa de:
+</p>
+
+<ul>
+<li>esconder pequenas imperfeições de IA;</li>
+<li>dar sensação de “filmado” ao material;</li>
+<li>unificar takes que vieram de gerações ligeiramente diferentes.</li>
+</ul>
+
+<p>
+Use:
+</p>
+
+<ul>
+<li>grão de filme leve e bem configurado;</li>
+<li>um pouco de halation em highlights;</li>
+<li>um touch de bloom/diffusion em luzes muito duras.</li>
+</ul>
+
+<div class='section'>5. Correção de flicker e artefatos</div>
+
+<p>
+Vídeos com IA às vezes trazem:
+</p>
+
+<ul>
+<li>micro mudanças de textura entre frames;</li>
+<li>piscadas em áreas de detalhe;</li>
+<li>variações de cor entre quadros.</li>
+</ul>
+
+<p>
+Você pode:
+</p>
+
+<ul>
+<li>usar plugins de deflicker quando necessário;</li>
+<li>cortar antes de trechos problemáticos;</li>
+<li>esconder pequenas falhas com cortes criativos, blur seletivo ou overlays.</li>
+</ul>
+
+<div class='section'>6. Som: o selo final de profissionalismo</div>
+
+<p>
+Um vídeo visualmente incrível pode parecer amador com som mal tratado.
+Mesmo em jobs simples, vale:
+</p>
+
+<ul>
+<li>nivelar locução, música e efeitos;</li>
+<li>evitar que a trilha engula a voz;</li>
+<li>usar efeitos sonoros sutis (whooshes, cliques, tilts) em cortes-chave.</li>
+</ul>
+
+<p>
+Se o vídeo for no estilo ASMR, por exemplo, a mix precisa ser ainda mais cuidadosa.
+</p>
+
+<div class='section'>7. Export e checagem final</div>
+
+<p>
+Antes de entregar:
+</p>
+
+<ul>
+<li>assista o vídeo sem parar, como se fosse o público;</li>
+<li>verifique se há cortes bruscos ou frames estranhos;</li>
+<li>confira se texto, logo e call to action estão legíveis e no tempo certo.</li>
+</ul>
+
+<p>
+Só então faça os exports finais para cada formato necessário (16:9, 9:16, 1:1, etc.).
+</p>
+
+</div>
+</div>
+</body>
+</html>
