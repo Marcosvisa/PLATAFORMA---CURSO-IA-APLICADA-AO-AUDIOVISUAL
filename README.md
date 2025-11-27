@@ -1,9 +1,9 @@
 # PLATAFORMA - CURSO IA APLICADA AO AUDIOVISUAL
 PLATAFORMA - ACESSO AO CURSO DE IA APLICADA AO AUDIOVSUAL
 ## 📋 Funcionalidades
-- **Menu Inteligente** 
+- **Menu de Módulos Inteligente** 
 - **Navegação Intuitiva** 
-- **Imersão no Conteúdo** 
+- **Responsividade** 
 
 ## 📁 Estrutura do Projeto
 
