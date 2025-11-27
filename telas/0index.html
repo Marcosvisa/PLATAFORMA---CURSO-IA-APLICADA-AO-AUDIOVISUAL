@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>IA Aplicada ao Audiovisual</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:radial-gradient(circle at top,#111827 0,#020617 45%,#000 100%);color:#e5e7eb;font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+body{
+  padding:24px 12px 40px;
+  display:flex;
+  flex-direction:column; /* empilha .capa acima de .page */
+  align-items:center;     /* centraliza horizontalmente */
+  gap: 20px;             /* opcional: espaço entre capa e page */
+}
+.page{display: inline-block; width:100%;max-width:1320px}
+.hero{ display: block; border-radius:22px;padding:28px 28px 32px;background:radial-gradient(circle at top left,rgba(56,189,248,.25),transparent 60%),radial-gradient(circle at bottom right,rgba(59,130,246,.2),transparent 60%),#020617dd;border:1px solid rgba(56,189,248,.35);box-shadow:0 0 0 1px rgba(15,23,42,.9),0 30px 80px rgba(15,23,42,.95),0 0 80px rgba(59,130,246,.45);margin-bottom:28px}
+.hero-kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#9ca3af;margin-bottom:10px}
+.hero-title{font-size:30px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e5e7eb}
+.hero-subtitle{margin-top:10px;font-size:15px;line-height:1.7;color:#cbd5f5;max-width:780px}
+.hero-grid{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.hero-button{display:inline-flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:999px;border:1px solid rgba(56,189,248,.55);background:radial-gradient(circle at top left,rgba(56,189,248,.25),transparent 65%);color:#e0f2fe;font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:all .16s ease-out}
+.hero-button span{opacity:.9}
+.hero-button small{font-size:10px;text-transform:none;letter-spacing:.04em;color:#bae6fd;margin-left:8px}
+.hero-button:hover{transform:translateY(-1px);box-shadow:0 0 0 1px rgba(56,189,248,.5),0 12px 35px rgba(15,23,42,.95);background:radial-gradient(circle at top left,rgba(59,130,246,.6),transparent 70%)}
+.hero-footer{margin-top:18px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6b7280;display:flex;align-items:center;gap:8px}
+.hero-footer-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(56,189,248,.7),transparent)}
+@media(max-width:768px){body{padding:16px 10px 28px}.hero{padding:22px 18px 24px}.hero-title{font-size:24px}}
+.capa {
+  border-radius:22px;
+  padding:28px;
+  background:radial-gradient(circle at top left,rgba(56,189,248,.25),transparent 60%),
+             radial-gradient(circle at bottom right,rgba(59,130,246,.2),transparent 60%),
+             #020617dd;
+  border:1px solid rgba(56,189,248,.35);
+  box-shadow:0 0 0 1px rgba(15,23,42,.9),
+             0 30px 80px rgba(15,23,42,.95),
+             0 0 80px rgba(59,130,246,.45);
+  margin-bottom:28px;
+  width:1320px;
+
+}
+
+.capa-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.capa-texto {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.capa-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.capa-resumo {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.capa {
+  position: relative;     
+  overflow: hidden;        
+  border-radius: 22px;
+  padding: 28px;
+  width: 100%;
+  height: 500px;
+  max-width: 1320px;
+  margin: 0 auto 28px;
+  border: 1px solid rgba(56,189,248,.35);
+  box-shadow:
+    0 0 0 1px rgba(15,23,42,.9),
+    0 30px 80px rgba(15,23,42,.95),
+    0 0 80px rgba(59,130,246,.45);
+
+
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,.20), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(59,130,246,.12), transparent 60%),
+    url("/imagens/robo.jpg");              
+  background-size: 100%;               
+  background-position: 75% 70%;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+
+  background-blend-mode: overlay;
+}
+
+.capa::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,5), rgba(16, 23, 36, 0.1)); 
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+.capa-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px){
+  .capa-container { flex-direction: column; gap: 16px; }
+  .capa { padding: 18px; border-radius: 16px; }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="capa">
+
+  <div class="capa-container">
+    <div class="capa-texto">
+        <h1 class="capa-title">IA Aplicada ao Audiovisual</h1>
+        <p class="capa-resumo">
+            Este curso explora como a inteligência artificial está redefinindo o trabalho criativo no audiovisual. Você vai entender como utilizar IA para acelerar edições, criar animações mais eficientes, aprimorar composições, gerar efeitos visuais sofisticados e otimizar todo o fluxo de produção. O objetivo é capacitar você a dominar ferramentas modernas e aplicar técnicas inteligentes para elevar a qualidade e a produtividade dos seus projetos.
+        </p>
+    </div>
+
+</div>
+  </div>
+
+
+
+
+<div class="page">
+<header class="hero">
+  <div class="hero-kicker">BLOCO 0 · ÍNDICE DO CURSO</div>
+<h1 class="hero-title">MÓDULOS</h1> 
+  <p class="hero-subtitle">
+    Clique em um dos blocos abaixo para abrir o conteúdo completo daquele módulo do curso.
+  </p>
+  <div class="hero-grid">
+    <a class="hero-button" href="bloco01.html" target="_self"><span>Bloco 01</span><small>IA aplicada ao audiovisual</small></a>
+<a class="hero-button" href="bloco02.html" target="_self"><span>Bloco 02</span><small>Estrutura do curso</small></a>
+<a class="hero-button" href="bloco03.html" target="_self"><span>Bloco 03</span><small>Fundamentos da IA</small></a>
+<a class="hero-button" href="bloco04.html" target="_self"><span>Bloco 04</span><small>3 pilares: consistência, precisão, realismo</small></a>
+<a class="hero-button" href="bloco05.html" target="_self"><span>Bloco 05</span><small>Modelos generativos</small></a>
+<a class="hero-button" href="bloco06.html" target="_self"><span>Bloco 06</span><small>Prompt engineering profissional</small></a>
+<a class="hero-button" href="bloco07.html" target="_self"><span>Bloco 07</span><small>Meta tokens avançados</small></a>
+<a class="hero-button" href="bloco08.html" target="_self"><span>Bloco 08</span><small>Frames perfeitos para animação</small></a>
+<a class="hero-button" href="bloco09.html" target="_self"><span>Bloco 09</span><small>Frame inicial & frame final</small></a>
+<a class="hero-button" href="bloco10.html" target="_self"><span>Bloco 10</span><small>Workflow Inteligente de vídeo</small></a>
+<a class="hero-button" href="bloco11.html" target="_self"><span>Bloco 11</span><small>Voz, roteiro e direção com IA</small></a>
+<a class="hero-button" href="bloco12.html" target="_self"><span>Bloco 12</span><small>Edição, color e finalização</small></a>
+<a class="hero-button" href="bloco13.html" target="_self"><span>Bloco 13</span><small>Mercado & oportunidades B2B</small></a>
+<a class="hero-button" href="bloco14.html" target="_self"><span>Bloco 14</span><small>Projetos finais do curso</small></a>
+<a class="hero-button" href="bloco15.html" target="_self"><span>Bloco 15</span><small>Bônus & próximos passos</small></a>
+  </div>
+  <div class="hero-footer">
+   
+    <div class="hero-footer-line"></div>
+  </div>
+</header>
+</div>
+</body>
+</html>

@@ -106,12 +106,17 @@ document.addEventListener('DOMContentLoaded', function() {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* importante para alinhar a logo à altura do kicker */
+  align-items: flex-start; 
 }
 
-.home {
-margin-right: 8px;;
-  margin-top: -3px; /* leve ajuste opcional */
+.home:hover{
+
+   transform: scale(1.05); 
+}
+  .home {
+  transition: transform 0.2s ease; 
+  margin-right: 8px;;
+  margin-top: -3px; 
 }
 
     .slide-kicker {
