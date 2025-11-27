@@ -4,6 +4,48 @@
   <meta charset="UTF-8" />
   <title>IA Aplicada ao Audiovisual – Bloco 1</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const videoContainer = document.querySelector('.video-container');
+    const slideAside = document.querySelector('.slide-aside');
+    
+    if (videoContainer && slideAside) {
+        let isScrolling = false;
+        
+        window.addEventListener('scroll', function() {
+            if (!isScrolling) {
+                window.requestAnimationFrame(function() {
+                    const slideRect = slideAside.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    const containerHeight = videoContainer.offsetHeight;
+                    
+                
+                    const scrollProgress = -slideRect.top;
+                    const maxScroll = slideRect.height - windowHeight + containerHeight;
+                    
+                    // Limita o movimento dentro do aside
+                    if (scrollProgress > 0 && scrollProgress < maxScroll) {
+                        videoContainer.style.transform = `translateY(${scrollProgress * 0.9}px)`;
+                    } else if (scrollProgress <= 0) {
+                        videoContainer.style.transform = 'translateY(0)';
+                    } else {
+                        videoContainer.style.transform = `translateY(${maxScroll * 0.9}px)`;
+                    }
+                    
+                    isScrolling = false;
+                });
+            }
+            isScrolling = true;
+        });
+
+        // Reset na rolagem rápida
+        window.addEventListener('scrollend', function() {
+            isScrolling = false;
+        });
+    }
+});
+</script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -13,6 +55,7 @@
       color: #ededed;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
+    
     body {
       display: flex;
       flex-direction: column;
@@ -59,18 +102,24 @@
     .slide::after {
       bottom: 0;
     }
-    .slide-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      gap: 16px;
-    }
+   .slide-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* importante para alinhar a logo à altura do kicker */
+}
+
+.home {
+margin-right: 8px;;
+  margin-top: -3px; /* leve ajuste opcional */
+}
+
     .slide-kicker {
       font-size: 12px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #7e8a94;
+      display:inline-flexbox;
     }
     .slide-title {
       font-size: 32px;
@@ -78,20 +127,23 @@
       letter-spacing: 0.03em;
       text-transform: uppercase;
       text-shadow: 0 0 16px rgba(0,228,255,0.25);
+      display: inline-block;
     }
+   
     .slide-badge {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,228,255,0.65);
-      background: rgba(5,9,16,0.8);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #8af0ff;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,228,255,0.65);
+  background: rgba(5,9,16,0.8);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8af0ff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px; 
+}
     .slide-badge-dot {
       width: 7px;
       height: 7px;
@@ -247,7 +299,68 @@
       color: #8af0ff;
       margin-top: 10px;
       margin-bottom: 4px;
+
     }
+  .video-container {
+    position: sticky;
+    top: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 228, 255, 0.3);
+    background: rgba(5, 7, 12, 0.9);
+    box-shadow: 0 0 20px rgba(0, 228, 255, 0.15);
+}
+
+.video-container {
+    position: relative;
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 228, 255, 0.3);
+    background: rgba(5, 7, 12, 0.9);
+    box-shadow: 0 0 20px rgba(0, 228, 255, 0.15);
+    will-change: transform; /* Melhora performance */
+}
+
+.video-container:hover {
+    box-shadow: 0 0 30px rgba(0, 228, 255, 0.3);
+    border-color: rgba(0, 228, 255, 0.5);
+}
+
+.video-scroll {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Remove as classes de sticky e visible que não estamos mais usando */
+
+@keyframes subtleGlow {
+    from {
+        box-shadow: 0 0 20px rgba(0, 228, 255, 0.15);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(0, 228, 255, 0.25);
+    }
+}
+
+/* Melhora a responsividade para mobile */
+@media (max-width: 900px) {
+    .video-container {
+        position: relative;
+        top: 0;
+        margin: 15px 0;
+    }
+    
+    .video-scroll {
+        width: 100%;
+        max-width: 100%;
+    }
+}
   </style>
 </head>
 <body>
@@ -256,18 +369,22 @@
 
     <!-- BLOCO 1 – IA APLICADA AO AUDIOVISUAL (VERSÃO DIDÁTICA EXPANDIDA) -->
     <section class="slide">
-      <div class="slide-header">
-        <div>
-          <div class="slide-kicker">INTRODUÇÃO</div>
-          <h1 class="slide-title">IA APLICADA AO AUDIOVISUAL</h1>
-          <div class="slide-subtitle">DO CONCEITO AO FILME FINAL</div>
-        </div>
-        <div class="slide-badge">
-          <span class="slide-badge-dot"></span>
-          WORKFLOW INTELIGENTE
-        </div>
-      </div>
+     <div class="slide-header">
+  <div>
+    <div class="slide-kicker">INTRODUÇÃO</div>
+    <h1 class="slide-title">IA APLICADA AO AUDIOVISUAL</h1>
+    <div class="slide-subtitle">DO CONCEITO AO FILME FINAL</div>
+  </div>
 
+  <a class="home" href="index.html">
+    <img src="/imagens/home.png" alt="Logo" height="40" width="40">
+  </a>
+</div>
+
+
+
+
+<br>
       <div class="slide-body">
         <div class="slide-main">
           <p class="slide-main-hero">
@@ -461,11 +578,13 @@ IDEIA → ROTEIRO VISUAL → FRAMES BASE → VÍDEO IA → EDIÇÃO &amp; COLOR 
             <span class="tag">WORKFLOW</span>
             <span class="tag">PEÇAS VENDÁVEIS</span>
           </div>
-            
-          <video width="480" controls>
-          <source src="/videos/slow-red-retro-lights-looped-low-scale-pattern-2024-12-02-03-53-59-utc.mp4" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-          </video>
+            <br>
+          <div class="video-container">
+    <video class="video-scroll" width="480" controls>
+        <source src="/videos/SAIDA FINAL - V1.mp4" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+</div>
 
         </aside>
       </div>

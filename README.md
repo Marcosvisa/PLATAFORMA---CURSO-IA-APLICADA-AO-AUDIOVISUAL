@@ -1,6 +1,5 @@
 # PLATAFORMA - CURSO IA APLICADA AO AUDIOVISUAL
-Plataforma para acesso do Curso de IA Aplicada ao Audiovisul.
-
+PLATAFORMA - ACESSO AO CURSO DE IA APLICADA AO AUDIOVSUAL
 ## 📋 Funcionalidades
 - **Menu Inteligente** 
 - **Navegação Intuitiva** 
@@ -10,7 +9,7 @@ Plataforma para acesso do Curso de IA Aplicada ao Audiovisul.
 
 ```
 projeto/
-├── format/         # Arquivos de formatação em CSS
+├── format/         # Arquivos de formatação em .CSS
 ├── imgens/         # Arquivos de imagens utilizados na plataforma
-├── telas/          # Telas em arquivo HTML
+├── telas/          # Telas em arquivo .HTML
 └── videos/         # Arquivos de videos utilizados na plataforma
